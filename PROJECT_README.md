@@ -17,7 +17,7 @@ Customer (web / WhatsApp / Windows CRM)
 - `frontend-admin`: React admin dashboard for bot, documents, tickets and integrations.
 - `backend`: FastAPI service. The only layer that accesses data, RAG, LLMs and customer CRM APIs.
 - `windows-crm`: Electron/React shell for a future Windows agent CRM. It uses the same backend REST API; do not place RAG or database credentials in it.
-- `database`: MongoDB collection design.
+- `database`: MongoDB collection design. MongoDB runs on the local server; no Docker setup is included.
 - `docs`: contracts and implementation notes.
 
 ## Main tenant rule

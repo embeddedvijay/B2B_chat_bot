@@ -1,0 +1,14 @@
+{
+  "default": {
+    "business_rag_enabled": false,
+    "common_rag_enabled": true,
+    "general_chat_enabled": true,
+    "fallback_mode": "ticket"
+  },
+  "restaurant_crm": {
+    "business_rag_enabled": true,
+    "common_rag_enabled": true,
+    "general_chat_enabled": true,
+    "fallback_mode": "ticket"
+  }
+}
