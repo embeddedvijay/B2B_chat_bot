@@ -15,4 +15,14 @@ cp .env.example .env
 python3 run_local.py
 ```
 
-The test reads `rag-data/generic/*.txt` and `rag-data/businesses/<business_id>/*.txt`. Add your own plain TXT knowledge files there. `config/businesses.json` enables/disables business RAG, common RAG and general chat per business. Set `MODEL_API_KEY` in `.env` to get an actual multilingual AI response; without a key, the matching TXT content is returned so the RAG pipeline can be tested locally.
+## Local model setup (no API payment)
+
+Install Ollama on the same server, then download the multilingual model once:
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull qwen3:8b
+ollama serve
+```
+
+The default `.env.example` already points to Ollama at `http://127.0.0.1:11434/v1`; no paid API key is required. The test reads `rag-data/generic/*.txt` and `rag-data/businesses/<business_id>/*.txt`. Add your own plain TXT knowledge files there. `config/businesses.json` enables/disables business RAG, common RAG and general chat per business.

@@ -3,7 +3,7 @@ from app.core.config import settings
 
 class LlmService:
     async def answer(self, message: str, context: str, language: str) -> str:
-        if not settings.model_api_key:
+        if settings.model_provider != "ollama" and not settings.model_api_key:
             return context
         system = (
             "You are a B2B support chatbot for Indian users. Reply in the user's language "

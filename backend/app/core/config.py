@@ -6,10 +6,10 @@ class Settings(BaseSettings):
     mongodb_url: str
     mongodb_database: str = "b2b_support_bot"
     redis_url: str
-    model_provider: str = "openai_compatible"
-    model_base_url: str = "https://api.openai.com/v1"
-    model_chat_model: str = "gpt-5-mini"
-    model_api_key: str = ""
+    model_provider: str = "ollama"
+    model_base_url: str = "http://127.0.0.1:11434/v1"
+    model_chat_model: str = "qwen3:8b"
+    model_api_key: str = "ollama"
     rag_data_path: str = "../rag-data"
     host: str = "0.0.0.0"
     port: int = 8000
