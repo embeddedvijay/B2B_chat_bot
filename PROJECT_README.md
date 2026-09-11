@@ -8,7 +8,7 @@ Multi-tenant RAG support platform for Indian businesses. It supports website/Wha
 Customer (web / WhatsApp / Windows CRM)
         -> FastAPI API
         -> tenant-safe RAG search + LLM response
-        -> PostgreSQL + pgvector / Redis / object storage
+        -> MongoDB Vector Search / Redis / object storage
         -> ticket + CRM / client APIs
 ```
 
@@ -17,12 +17,19 @@ Customer (web / WhatsApp / Windows CRM)
 - `frontend-admin`: React admin dashboard for bot, documents, tickets and integrations.
 - `backend`: FastAPI service. The only layer that accesses data, RAG, LLMs and customer CRM APIs.
 - `windows-crm`: Electron/React shell for a future Windows agent CRM. It uses the same backend REST API; do not place RAG or database credentials in it.
-- `database`: PostgreSQL + pgvector starter schema.
+- `database`: MongoDB collection design.
 - `docs`: contracts and implementation notes.
 
 ## Main tenant rule
 
 Every tenant-owned database query, document upload, vector search, ticket and conversation must carry `tenant_id`. This prevents company data leakage.
+
+## Chat and RAG priority
+
+1. Business RAG: enabled TXT files for the selected business.
+2. Common RAG: shared answers for greetings, bot usage and common troubleshooting.
+3. General chat: only when enabled in business config; it must not invent account, payment, policy or business data.
+4. Fallback: create a ticket or transfer to a human for sensitive/low-confidence queries.
 
 ## Run backend locally
 

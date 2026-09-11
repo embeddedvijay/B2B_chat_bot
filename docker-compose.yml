@@ -1,18 +1,15 @@
 services:
-  postgres:
-    image: pgvector/pgvector:pg16
+  mongo:
+    image: mongo:8
     environment:
-      POSTGRES_DB: supportbot
-      POSTGRES_USER: supportbot
-      POSTGRES_PASSWORD: supportbot_dev
+      MONGO_INITDB_DATABASE: b2b_support_bot
     ports:
-      - "5432:5432"
+      - "27017:27017"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - mongo_data:/data/db
   redis:
     image: redis:7-alpine
     ports:
       - "6379:6379"
 volumes:
-  postgres_data:
+  mongo_data:

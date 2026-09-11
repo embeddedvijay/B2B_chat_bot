@@ -10,9 +10,12 @@ class ChatService:
 
     async def reply(self, payload: ChatMessageIn) -> ChatMessageOut:
         language = self.language.detect(payload.message)
-        hits = await self.retriever.search(payload.tenant_id, payload.message)
-        if not hits:
-            reply = "Mujhe approved knowledge base me iska confirmed answer nahi mila. Main support ticket create kar sakta hoon." if language != "en" else "I could not find a confirmed answer in the approved knowledge base. I can create a support ticket."
-            return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=reply, language=language, confidence=0.0, handoff_required=True)
-        # Send only retrieved, tenant-scoped context to the configured LLM here.
-        return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply="RAG response placeholder", language=language, confidence=0.85, handoff_required=False)
+        business_hits = await self.retriever.search_business(payload.tenant_id, payload.message)
+        if business_hits:
+            return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply="Business RAG response placeholder", language=language, confidence=0.90, handoff_required=False)
+        common_hits = await self.retriever.search_common(payload.message)
+        if common_hits:
+            return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply="Common RAG response placeholder", language=language, confidence=0.80, handoff_required=False)
+        # General chat is allowed only when business configuration enables it.
+        reply = "Main iske liye general guidance de sakta hoon. Account, payment ya business-specific issue ke liye support ticket create karunga." if language != "en" else "I can provide general guidance. For account, payment, or business-specific issues, I will create a support ticket."
+        return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=reply, language=language, confidence=0.40, handoff_required=False)

@@ -1,0 +1,5 @@
+# Common Chat Knowledge
+
+The bot can greet users, explain its capabilities, answer common app-navigation questions, and ask clarifying questions in Hindi, English, or Hinglish.
+
+For account data, payments, invoices, legal matters, customer-specific status, or any answer not present in an approved source, the bot must use an authenticated business API or create a support ticket.

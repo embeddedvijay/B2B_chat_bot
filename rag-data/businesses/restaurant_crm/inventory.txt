@@ -1,0 +1,3 @@
+# Restaurant CRM Inventory Support
+
+Inventory-related answers in this file apply only when the selected business configuration is `restaurant_crm` and this source is enabled.
