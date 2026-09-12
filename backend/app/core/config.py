@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     redis_url: str
     model_provider: str = "ollama"
     model_base_url: str = "http://127.0.0.1:11434/v1"
-    model_chat_model: str = "qwen3:8b"
+    model_chat_model: str = "qwen2.5:3b"
     model_api_key: str = "ollama"
     rag_data_path: str = "../rag-data"
     host: str = "0.0.0.0"
