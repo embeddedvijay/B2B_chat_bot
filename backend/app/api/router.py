@@ -1,8 +1,9 @@
 from fastapi import APIRouter
-from app.api import chat, documents, tickets, crm
+from app.api import chat, documents, tickets, crm, whatsapp
 
 api_router = APIRouter()
 api_router.include_router(chat.router, prefix="/chat", tags=["chat"])
 api_router.include_router(documents.router, prefix="/documents", tags=["documents"])
 api_router.include_router(tickets.router, prefix="/tickets", tags=["tickets"])
 api_router.include_router(crm.router, prefix="/crm", tags=["windows-crm"])
+api_router.include_router(whatsapp.router, prefix="/channels/whatsapp", tags=["whatsapp"])
