@@ -1,0 +1,31 @@
+# Spice Garden Restaurant - Demo Customer Profile
+
+This is dummy RAG data for WhatsApp testing. Replace every detail with the real restaurant information before production use.
+
+RESTAURANT_NAME: Spice Garden Restaurant
+CUISINE: North Indian, Chinese and quick bites
+ADDRESS: 21 Market Road, Bengaluru
+TIMING: Daily, 11:00 AM to 11:00 PM
+TABLE_BOOKING_RULE: Table booking is available for 2 to 10 guests. Advance booking is recommended on weekends. Please share date, time, guest count and contact number.
+DELIVERY_TAKEAWAY_RULE: Takeaway is available from 11:00 AM to 10:30 PM. Delivery is available within 5 km. Delivery time is usually 35 to 45 minutes, subject to traffic and kitchen load.
+
+TODAYS_SPECIAL:
+- Paneer Butter Masala with 2 Butter Naan — Rs. 299
+- Veg Biryani with Raita — Rs. 229
+- Hakka Noodles — Rs. 199
+
+MENU:
+- Tomato Soup — Rs. 109
+- Veg Manchurian — Rs. 189
+- Paneer Butter Masala — Rs. 249
+- Dal Tadka — Rs. 189
+- Veg Biryani — Rs. 219
+- Hakka Noodles — Rs. 189
+- Butter Naan — Rs. 39
+- Gulab Jamun — Rs. 79
+
+MENU_RESPONSE: Spice Garden Restaurant ka demo menu: Tomato Soup Rs.109, Veg Manchurian Rs.189, Paneer Butter Masala Rs.249, Dal Tadka Rs.189, Veg Biryani Rs.219, Hakka Noodles Rs.189, Butter Naan Rs.39 aur Gulab Jamun Rs.79. Aap kis item ka order karna chahenge?
+SPECIAL_RESPONSE: Aaj ka Today's Special: Paneer Butter Masala with 2 Butter Naan Rs.299, Veg Biryani with Raita Rs.229, aur Hakka Noodles Rs.199. Kya aap order karna chahenge?
+LOCATION_RESPONSE: Spice Garden Restaurant, 21 Market Road, Bengaluru. Hum roz 11:00 AM se 11:00 PM tak open hain.
+BOOKING_RESPONSE: Table booking 2 se 10 guests ke liye available hai. Kripya date, time, kitne guests hain aur contact number share kijiye. Weekend par advance booking recommended hai.
+DELIVERY_RESPONSE: Takeaway 11:00 AM se 10:30 PM tak available hai. Delivery 5 km tak available hai aur usually 35 se 45 minutes lagte hain. Aap delivery chahenge ya takeaway?
