@@ -1,0 +1,7 @@
+{
+  "name": "b2b-chat-bot",
+  "private": true,
+  "scripts": {
+    "start": "bash start_local.sh"
+  }
+}
