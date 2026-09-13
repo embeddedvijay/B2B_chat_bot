@@ -13,6 +13,6 @@ class Settings(BaseSettings):
     rag_data_path: str = "../rag-data"
     whatsapp_bridge_secret: str = ""
     host: str = "0.0.0.0"
-    port: int = 8000
+    port: int = 8010
 
 settings = Settings()
