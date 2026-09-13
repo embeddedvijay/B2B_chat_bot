@@ -105,7 +105,8 @@ async function start() {
         const result = await askBot(text, remoteJid);
         if (result.reply) {
           await socket.sendMessage(remoteJid, { text: result.reply }, { quoted: msg });
-          console.log(`RAG/model reply content: ${result.reply}`);\n          console.log(`Bot reply sent to ${remoteJid}`);
+          console.log(`RAG/model reply content: ${result.reply}`);
+          console.log(`Bot reply sent to ${remoteJid}`);
         }
       } catch (error) {
         logger.error(error, "Unable to process WhatsApp message");
