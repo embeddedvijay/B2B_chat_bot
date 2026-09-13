@@ -90,7 +90,8 @@ async function start() {
   });
 
   socket.ev.on("messages.upsert", async ({ messages, type }) => {
-    if (type !== "notify") return;
+    if (type !== "notify" && type !== "append") return;
+    console.log(`Received ${type} event with ${messages.length} message(s)`);
     for (const msg of messages) {
       const remoteJid = msg.key.remoteJid || "";
       if (msg.key.fromMe || remoteJid === "status@broadcast" || !isIndividualChat(remoteJid)) continue;
