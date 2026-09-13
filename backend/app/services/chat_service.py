@@ -19,27 +19,37 @@ class ChatService:
         self.llm = LlmService()
         self.business_config = BusinessConfigService()
 
-    def _greeting_response(self, business_id: str, message: str) -> str | None:
-        if business_id != "restaurant_crm":
+    def _restaurant_direct_response(self, message: str) -> str | None:
+        normalized = re.sub(r"[^a-zA-Z0-9\s]", "", message).strip().lower()
+        greeting_terms = {"hi", "hello", "hey", "namaste", "hello ji", "hi ji"}
+        if normalized in greeting_terms:
+            source = self.retriever.get_business_document("restaurant_crm", "greeting.txt")
+            pattern = r"^RESPONSE:\s*(.+)$"
+        else:
+            source = self.retriever.get_business_document("restaurant_crm", "restaurant_profile.txt")
+            intent_patterns = [
+                (r"\b(today|todays|special|aaj)\b", r"^SPECIAL_RESPONSE:\s*(.+)$"),
+                (r"\b(menu|price|rate|khana|food)\b", r"^MENU_RESPONSE:\s*(.+)$"),
+                (r"\b(table|booking|book)\b", r"^BOOKING_RESPONSE:\s*(.+)$"),
+                (r"\b(delivery|takeaway|pickup|parcel)\b", r"^DELIVERY_RESPONSE:\s*(.+)$"),
+                (r"\b(address|location|time|timing|open|close)\b", r"^LOCATION_RESPONSE:\s*(.+)$")
+            ]
+            pattern = next((response_pattern for query_pattern, response_pattern in intent_patterns if re.search(query_pattern, normalized)), None)
+        if not source or not pattern:
             return None
-        normalized = re.sub(r"[^a-zA-Z\s]", "", message).strip().lower()
-        if normalized not in {"hi", "hello", "hey", "namaste", "hello ji", "hi ji"}:
-            return None
-        source = self.retriever.get_business_document(business_id, "greeting.txt")
-        if not source:
-            return None
-        match = re.search(r"^RESPONSE:\s*(.+)$", source, flags=re.MULTILINE)
+        match = re.search(pattern, source, flags=re.MULTILINE)
         if not match:
             return None
-        logger.info("RAG direct response selected: businesses/%s/greeting.txt", business_id)
+        logger.info("RAG direct response selected: %s", "greeting.txt" if normalized in greeting_terms else "restaurant_profile.txt")
         return match.group(1).strip()
 
     async def reply(self, payload: ChatMessageIn) -> ChatMessageOut:
         language = self.language.detect(payload.message)
         config = self.business_config.get(payload.business_id)
-        greeting = self._greeting_response(payload.business_id, payload.message)
-        if greeting:
-            return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=greeting, language=language, confidence=1.0, handoff_required=False)
+        if payload.business_id == "restaurant_crm":
+            direct_reply = self._restaurant_direct_response(payload.message)
+            if direct_reply:
+                return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=direct_reply, language=language, confidence=1.0, handoff_required=False)
         business_hits = await self.retriever.search_business(payload.business_id, payload.message) if config["business_rag_enabled"] else []
         if business_hits:
             logger.info("RAG business sources selected: %s", [hit["source_file"] for hit in business_hits])
