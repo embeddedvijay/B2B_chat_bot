@@ -21,15 +21,15 @@ class ChatService:
         business_hits = await self.retriever.search_business(payload.business_id, payload.message) if config["business_rag_enabled"] else []
         if business_hits:
             context = "\n\n".join(hit["content"] for hit in business_hits)
-            reply = await self.llm.answer(payload.message, context, language)
+            reply = await self.llm.answer(payload.message, context, language, payload.business_id)
             return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=reply, language=language, confidence=business_hits[0]["score"], handoff_required=False)
         common_hits = await self.retriever.search_common(payload.message) if config["common_rag_enabled"] else []
         if common_hits:
             context = "\n\n".join(hit["content"] for hit in common_hits)
-            reply = await self.llm.answer(payload.message, context, language)
+            reply = await self.llm.answer(payload.message, context, language, payload.business_id)
             return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=reply, language=language, confidence=common_hits[0]["score"], handoff_required=False)
         if not config["general_chat_enabled"]:
             reply = "Is business ke liye general chat disabled hai. Main support ticket create kar sakta hoon." if language != "en" else "General chat is disabled for this business. I can create a support ticket."
             return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=reply, language=language, confidence=0.0, handoff_required=True)
-        reply = await self.llm.general_answer(payload.message, language)
+        reply = await self.llm.general_answer(payload.message, language, payload.business_id)
         return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=reply, language=language, confidence=0.20, handoff_required=False)
