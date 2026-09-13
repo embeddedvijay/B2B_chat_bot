@@ -40,7 +40,8 @@ class ChatService:
         match = re.search(pattern, source, flags=re.MULTILINE)
         if not match:
             return None
-        logger.info("RAG direct response selected: %s", "greeting.txt" if normalized in greeting_terms else "restaurant_profile.txt")
+        source_name = "greeting.txt" if normalized in greeting_terms else "restaurant_profile.txt"
+        print(f"RAG DIRECT: {source_name}")
         return match.group(1).strip()
 
     async def reply(self, payload: ChatMessageIn) -> ChatMessageOut:
