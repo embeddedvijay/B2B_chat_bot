@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     model_chat_model: str = "qwen2.5:3b"
     model_api_key: str = "ollama"
     rag_data_path: str = "../rag-data"
+    whatsapp_bridge_secret: str = ""
     host: str = "0.0.0.0"
     port: int = 8000
 
