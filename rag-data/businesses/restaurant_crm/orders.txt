@@ -1,0 +1,30 @@
+# Restaurant CRM: Orders and Kitchen Workflow
+
+## Order flow
+Typical states are:
+1. Pending or new order
+2. Accepted / sent to kitchen
+3. Preparing
+4. Ready to serve or packed
+5. Completed after payment/closure
+6. Cancelled when the order is not fulfilled
+
+Use the actual status configured by the restaurant. Do not change an order status without staff authorization.
+
+## Dine-in orders
+A dine-in order must be linked to the correct table number and, where available, floor or section.
+Before adding items, confirm the table. For changes, repeat the item and quantity back to staff or customer.
+
+## Takeaway and delivery
+Capture customer name, contact number, items, quantity, delivery/takeaway preference, address if applicable, and payment status.
+Never expose another customer's order, phone number, address, or payment information.
+
+## Cancellation and modification
+- Before kitchen acceptance: update or cancel after confirming the request.
+- After preparation starts: escalate to restaurant staff because food may already be prepared.
+- A cancellation reason should be recorded for reporting.
+- Refunds or payment reversals require authorized staff and payment verification.
+
+## WhatsApp ordering
+Customer messages can be used to show Today's Special, Full Menu, and order options.
+The final order should be confirmed with item, quantity, price, delivery/table details, and total before placing it.
