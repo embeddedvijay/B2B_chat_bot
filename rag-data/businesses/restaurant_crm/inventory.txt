@@ -1,3 +1,31 @@
-# Restaurant CRM Inventory Support
+# Restaurant CRM: Inventory and Stock
 
-Inventory-related answers in this file apply only when the selected business configuration is `restaurant_crm` and this source is enabled.
+This source covers inventory workflow guidance. Stock quantity, purchase price, expiry date, and reorder status must always be read from the live inventory database.
+
+## Inventory items
+Each ingredient or sellable stock item should have:
+- item name and category
+- unit: kg, gram, litre, ml, piece, packet, bottle, or box
+- current stock quantity
+- minimum/reorder level
+- supplier
+- purchase price and optional expiry/batch details
+
+## Stock operations
+- Stock in: record received quantity, supplier, invoice/reference, purchase cost, and expiry/batch where needed.
+- Stock out/adjustment: use only for wastage, damage, staff consumption, correction, or physical-count mismatch. Record a reason.
+- Physical stock count: compare actual count with system count and create an auditable adjustment only after verification.
+- Never tell a customer or manager an exact stock value unless it comes from the live system.
+
+## Low stock and Smart Reorder
+Smart Reorder keeps a configured list of items and reorder quantities for the restaurant.
+When stock reaches the configured threshold, review the suggested quantity, supplier availability, recent consumption, and existing purchase orders before ordering.
+A low-stock alert is a signal to review; it is not proof that an item is unavailable to sell.
+
+## Menu mapping
+Menu items can map to one or more inventory ingredients. Correct mapping prevents sales of a dish from being shown as available when required ingredients are unavailable.
+If deductions look wrong, verify item unit conversion, recipe quantity, and duplicate/missing mappings.
+
+## Supplier support
+Use supplier records for supplier name, contact, supplied items, expected delivery, and past order references.
+Before creating a purchase order, confirm the supplier and quantity with an authorized manager.
