@@ -24,6 +24,13 @@ class TextFileRetriever:
             self.documents.append(RagDocument("business", path.parent.name, str(path.relative_to(self.rag_root)), path.read_text(encoding="utf-8")))
         return len(self.documents)
 
+    def get_business_document(self, business_id: str, filename: str) -> str | None:
+        expected = f"businesses/{business_id}/{filename}"
+        for doc in self.documents:
+            if doc.source_scope == "business" and doc.business_id == business_id and doc.source_file == expected:
+                return doc.content
+        return None
+
     def _search(self, query: str, scope: str, business_id: str | None = None) -> list[dict]:
         terms = {word for word in re.findall(r"[\w]+", query.lower()) if len(word) > 2}
         results = []
