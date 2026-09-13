@@ -1,0 +1,24 @@
+# Restaurant CRM: Menu Management
+
+Use this source only for Restaurant CRM product guidance. It describes how to operate menu management; it does not contain a restaurant's live menu or current prices.
+
+## Add or update a menu item
+1. Open Menu Management.
+2. Choose the category, then add or edit the item name, description, selling price, tax if applicable, and availability.
+3. Save the item.
+4. Confirm the item is enabled before showing it to customers.
+
+## Availability
+- Disable or mark an item unavailable when it is sold out. Do not delete an item only because stock is temporarily unavailable.
+- Re-enable the item after stock is received and verified.
+- If a customer asks whether a specific item is available now, check the live menu or inventory system. Do not guess from this guide.
+
+## Menu to inventory sync
+When a menu item is saved, the system can create the related inventory item and menu-inventory mapping automatically.
+The mapping is required to deduct ingredient usage and identify items affected by low stock.
+If the menu item is created but inventory is not linked, open the mapping screen and attach the correct stock item and quantity.
+
+## Customer queries
+- "Aaj special kya hai?" / "Today's special?" -> check the configured Today's Special menu in the live system.
+- "Full menu bhejo" -> use the live menu data; do not invent item names or prices.
+- "Item out of stock hai" -> apologize, offer currently available alternatives from live menu, and notify staff if the status appears incorrect.
