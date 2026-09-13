@@ -4,3 +4,4 @@ __pycache__/
 node_modules/
 dist/
 *.sqlite3
+whatsapp-bridge/auth_info/
