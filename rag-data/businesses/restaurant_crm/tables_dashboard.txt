@@ -1,0 +1,20 @@
+# Restaurant CRM: Tables and Live Dashboard
+
+## Table management
+Tables can be assigned a table number, floor/section, seating capacity, and current occupancy state.
+Use the correct table number while booking or placing a dine-in order.
+
+## Live dashboard definitions
+- Tables booked: tables with an active/pending dine-in order or booking.
+- Tables empty: currently available tables.
+- New orders: recently received orders requiring action.
+- Cancelled orders: orders cancelled in the selected reporting period.
+- Completed payment: orders whose payment has been completed.
+- Total tables: configured restaurant tables.
+
+These dashboard values are live operational indicators and can change at any time. For an exact current count, query the live dashboard instead of using this document.
+
+## Booking support
+Collect the guest name, contact, date/time, party size, and preferred table/section if available.
+Confirm availability before promising a booking.
+For a large group, special event, or conflicting time, hand off to restaurant staff.
