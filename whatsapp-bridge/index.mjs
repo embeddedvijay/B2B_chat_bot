@@ -29,6 +29,10 @@ function messageText(message) {
   ).trim();
 }
 
+function isIndividualChat(remoteJid) {
+  return remoteJid.endsWith("@s.whatsapp.net") || remoteJid.endsWith("@lid");
+}
+
 async function askBot(message, remoteJid) {
   const customerId = remoteJid.replace(/@.*$/, "");
   const response = await fetch(`${BACKEND_URL}/api/channels/whatsapp/incoming`, {
@@ -89,14 +93,18 @@ async function start() {
     if (type !== "notify") return;
     for (const msg of messages) {
       const remoteJid = msg.key.remoteJid || "";
-      if (msg.key.fromMe || remoteJid === "status@broadcast" || !remoteJid.endsWith("@s.whatsapp.net")) continue;
+      if (msg.key.fromMe || remoteJid === "status@broadcast" || !isIndividualChat(remoteJid)) continue;
       const text = messageText(msg.message || {});
-      if (!text) continue;
+      if (!text) {
+        console.log(`Ignoring non-text message from ${remoteJid}`);
+        continue;
+      }
       try {
         console.log(`Incoming WhatsApp message from ${remoteJid}: ${text}`);
         const result = await askBot(text, remoteJid);
         if (result.reply) {
           await socket.sendMessage(remoteJid, { text: result.reply }, { quoted: msg });
+          console.log(`Bot reply sent to ${remoteJid}`);
         }
       } catch (error) {
         logger.error(error, "Unable to process WhatsApp message");
