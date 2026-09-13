@@ -31,6 +31,5 @@ class ChatService:
         if not config["general_chat_enabled"]:
             reply = "Is business ke liye general chat disabled hai. Main support ticket create kar sakta hoon." if language != "en" else "General chat is disabled for this business. I can create a support ticket."
             return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=reply, language=language, confidence=0.0, handoff_required=True)
-        # General chat is allowed only when business configuration enables it.
-        reply = "Main iske liye general guidance de sakta hoon. Account, payment ya business-specific issue ke liye support ticket create karunga." if language != "en" else "I can provide general guidance. For account, payment, or business-specific issues, I will create a support ticket."
-        return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=reply, language=language, confidence=0.40, handoff_required=False)
+        reply = await self.llm.general_answer(payload.message, language)
+        return ChatMessageOut(conversation_id=payload.conversation_id or str(uuid4()), reply=reply, language=language, confidence=0.20, handoff_required=False)
