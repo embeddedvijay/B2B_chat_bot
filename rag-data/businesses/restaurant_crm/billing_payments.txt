@@ -1,0 +1,17 @@
+# Restaurant CRM: Billing and Payments
+
+## Bill handling
+A bill should show ordered items, quantity, item price, applicable taxes/charges, discounts if authorized, and final payable amount.
+Check the live order before quoting the final bill. Do not calculate or invent totals from memory.
+
+## Payment
+Accepted payment modes may include cash, UPI, card, or other configured methods.
+Mark payment completed only after staff confirms payment success.
+For UPI/card failures, duplicate debits, refund requests, or charge disputes, collect order/reference details and hand off to an authorized payment support person.
+
+## Discounts and complimentary items
+Only authorized users may apply discounts, coupons, or complimentary items.
+Record the reason and authorization where the Restaurant CRM workflow requires it.
+
+## Privacy
+Never send payment reference, phone number, invoice details, or order history to an unverified person.
