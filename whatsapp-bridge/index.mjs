@@ -8,7 +8,7 @@ import makeWASocket, {
 import pino from "pino";
 import qrcode from "qrcode-terminal";
 
-const BACKEND_URL = (process.env.BACKEND_URL || "http://127.0.0.1:8000").replace(/\/$/, "");
+const BACKEND_URL = (process.env.BACKEND_URL || "http://127.0.0.1:8010").replace(/\/$/, "");
 const BRIDGE_SECRET = process.env.BRIDGE_SECRET || "";
 const TENANT_ID = process.env.TENANT_ID || "local";
 const BUSINESS_ID = process.env.BUSINESS_ID || "default";
