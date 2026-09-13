@@ -1,0 +1,4 @@
+# Restaurant Customer Greeting
+
+This file is the approved customer-facing greeting for the Restaurant CRM bot.
+RESPONSE: Namaste! Hamare restaurant me aapka swagat hai. Main Full Menu, Today's Special, table booking aur order me help kar sakta hoon. Aap kya dekhna chahenge?
